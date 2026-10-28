@@ -71,7 +71,7 @@ function draw(svg,fs,res,o={}){
 /* ---------- solution write-up ---------- */
 function solution(res){
   const c=res.conc;
-  let h=`<h2>Solution</h2><div class="scroll"><table><tr><th>Force</th><th>F (N)</th><th>θ (°)</th>${c?'':'<th>x (m)</th><th>y (m)</th>'}<th>Fx = F cos θ</th><th>Fy = F sin θ</th>${c?'':'<th>M<sub>O</sub> = x·Fy − y·Fx</th>'}</tr>`;
+  let h=`<h2>Solution</h2><div class="scroll"><table border = 1><tr><th>Force</th><th>F (N)</th><th>θ (°)</th>${c?'':'<th>x (m)</th><th>y (m)</th>'}<th>Fx = F cos θ</th><th>Fy = F sin θ</th>${c?'':'<th>M<sub>O</sub> = x·Fy − y·Fx</th>'}</tr>`;
   res.rows.forEach(r=>{h+=`<tr><td>F${r.i}</td><td>${r.F}</td><td>${r.a}</td>${c?'':`<td>${r.x}</td><td>${r.y}</td>`}<td>${n2(r.fx)}</td><td>${n2(r.fy)}</td>${c?'':`<td>${n2(r.m)}</td>`}</tr>`});
   h+=`<tr class="sum"><td>Sum</td><td></td><td></td>${c?'':'<td></td><td></td>'}<td>${n2(res.sx)}</td><td>${n2(res.sy)}</td>${c?'':`<td>${n2(res.sm)}</td>`}</tr></table></div>`;
   h+=`<div class="res"><div><b>${n2(res.sx)} N</b><span>ΣFx</span></div><div><b>${n2(res.sy)} N</b><span>ΣFy</span></div>`;
@@ -83,15 +83,15 @@ function solution(res){
   if(res.status==='equilibrium') h+=`<p><b>R = 0 and ΣM = 0, so the system is in equilibrium.</b></p>`;
   else if(res.status==='couple') h+=`<p>R = 0 but ΣM<sub>O</sub> = ${n2(res.sm)} N·m, so the system reduces to a <b>pure couple</b> of ${n2(Math.abs(res.sm))} N·m ${res.sm>0?'counter-clockwise':'clockwise'}.</p>`;
   else{
-    h+=`<p>R = √(ΣFx² + ΣFy²) = √(${n2(res.sx)}² + ${n2(res.sy)}²) = <b>${n2(res.R)} N</b></p>`;
-    h+=`<p>α = tan⁻¹(|ΣFy| / |ΣFx|) = tan⁻¹(${n2(Math.abs(res.sy))} / ${n2(Math.abs(res.sx))}) = ${n2(res.alpha)}°</p>`;
-    h+=`<p>ΣFx is ${res.sx>=0?'positive':'negative'} and ΣFy is ${res.sy>=0?'positive':'negative'}, so R lies in quadrant ${res.quad}: θ = <b>${n2(res.th)}°</b> from the +x axis, which is ${n2(res.alpha)}° ${res.sy>=0?'above':'below'} the ${res.sx>=0?'+x':'−x'} axis.</p>`;
+    h+=`<p><br><hr>R = √(ΣFx² + ΣFy²) = √(${n2(res.sx)}² + ${n2(res.sy)}²) = <b>${n2(res.R)} N</b></p>`;
+    h+=`<p>θ = tan⁻¹(|ΣFy| / |ΣFx|) = tan⁻¹(${n2(Math.abs(res.sy))} / ${n2(Math.abs(res.sx))}) = ${n2(res.alpha)}°</p>`;
+    h+=`<p><hr>ΣFx is ${res.sx>=0?'positive':'negative'} and ΣFy is ${res.sy>=0?'positive':'negative'}, so R lies in quadrant ${res.quad}: θ = <b>${n2(res.th)}°</b> from the +x axis, which is ${n2(res.alpha)}° ${res.sy>=0?'above':'below'} the ${res.sx>=0?'+x':'−x'} axis.</p>`;
     if(!c){
       if(Math.abs(res.sm)<1e-9) h+=`<p>ΣM<sub>O</sub> = 0, so R acts through the origin.</p>`;
       else{
-        h+=`<p>Varignon’s theorem: R<sub>x</sub>·(−y) + R<sub>y</sub>·x = ΣM<sub>O</sub>.</p>`;
-        if(Math.abs(res.sy)>1e-6) h+=`<p>At y = 0: x = ΣM<sub>O</sub> / ΣFy = ${n2(res.sm)} / ${n2(res.sy)} = <b>${n2(res.sm/res.sy)} m</b> (x-intercept of the line of action)</p>`;
-        if(Math.abs(res.sx)>1e-6) h+=`<p>At x = 0: y = −ΣM<sub>O</sub> / ΣFx = ${n2(-res.sm/res.sx)} m (y-intercept)</p>`;
+        h+=`<p><br>Varignon’s theorem: R<sub>x</sub>·(−y) + R<sub>y</sub>·x = ΣM<sub>O</sub>.</p>`;
+        if(Math.abs(res.sy)>1e-6) h+=`<p><br>At y = 0: x = ΣM<sub>O</sub> / ΣFy = ${n2(res.sm)} / ${n2(res.sy)} = <b>${n2(res.sm/res.sy)} m</b> (x-intercept of the line of action)</p>`;
+        if(Math.abs(res.sx)>1e-6) h+=`<p><br>At x = 0: y = −ΣM<sub>O</sub> / ΣFx = ${n2(-res.sm/res.sx)} m (y-intercept)</p>`;
       }
     }
   }
