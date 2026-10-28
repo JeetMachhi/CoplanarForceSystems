@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Coplanar Force Systems</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;600;800&family=Newsreader:ital,wght@0,400;0,600;1,400&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+<h1>Coplanar force systems</h1>
+<p class="sub">Add forces, get the sums of components, the resultant and its line of action, with every step shown. Angles are measured counter-clockwise from the +x axis.</p>
+<div class="tabs" role="tablist">
+  <button role="tab" id="t1" aria-selected="true" aria-controls="solver">Solver</button>
+  <button role="tab" id="t2" aria-selected="false" aria-controls="practice">Practice</button>
+</div>
+
+<section id="solver" role="tabpanel" aria-labelledby="t1">
+  <div class="grid">
+    <div class="panel">
+      <h2>Forces</h2>
+      <div class="scroll"><table id="ftab"></table></div>
+      <label class="opt"><input type="checkbox" id="conc"> Concurrent system (all forces act at the origin)</label>
+      <div class="row">
+        <button class="btn" id="add">Add force</button>
+        <button class="btn" id="clear">Clear all</button>
+      </div>
+      <p class="leg">Force in N, positions in m. A force at (x, y) is drawn starting from that point.</p>
+    </div>
+    <div class="panel">
+      <h2>Diagram</h2>
+      <svg id="svg1" viewBox="-5 -5 10 10" role="img" aria-label="Force diagram"></svg>
+      <p class="leg"><i style="background:var(--blue)"></i>applied forces &nbsp; <i style="background:var(--red)"></i>resultant</p>
+    </div>
+  </div>
+  <div class="panel" id="out1"></div>
+</section>
+
+<section id="practice" role="tabpanel" aria-labelledby="t2" hidden>
+  <div class="panel">
+    <h2>Generate a question</h2>
+    <div class="row" style="margin-top:0">
+      <label>Type
+        <select id="qtype"><option value="mixed">Mixed</option><option value="conc">Concurrent only</option><option value="non">Non-concurrent only</option></select>
+      </label>
+      <label>Forces
+        <select id="qn"><option value="0">Random</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+      </label>
+      <button class="btn pri" id="gen">New Question</button>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="panel">
+      <h2>Problem</h2>
+      <div class="q" id="qtext"></div>
+      <h2 style="margin-top:16px">Your answers</h2>
+      <div class="ans" id="ans"></div>
+      <div class="row">
+        <button class="btn pri" id="check">Check answers</button>
+        <button class="btn" id="reveal">Show solution</button>
+        <button class="btn" id="toSolver">Open in solver</button>
+      </div>
+    </div>
+    <div class="panel">
+      <h2>Diagram</h2>
+      <svg id="svg2" viewBox="-5 -5 10 10" role="img" aria-label="Question diagram"></svg>
+      <p class="leg">Dots mark where each force acts. Dashed arcs show θ from the +x axis. The resultant and the x/y components appear when you show the solution.</p>
+    </div>
+  </div>
+  <div class="panel" id="out2" hidden></div>
+</section>
+<h4 align = Right>Made By Jeet, Rishikesh & Keshav</h4>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
